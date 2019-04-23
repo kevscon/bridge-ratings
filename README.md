@@ -1,3 +1,3 @@
-# Forecasting Bridge Performance with Classification
+# Predicting Bridge Performance with NBI Data
 
-This project explores what bridge performance trends can be predicted based on characteristics gleaned from the National Bridge Inventory dataset.
+Using publicly available data gleaned from the National Bridge Inventory (NBI), a classification model was developed to predict bridges that will fall into poor condition over a fixed amount of time. This analysis also explored what trends can be interpreted from specific bridge characteristics.
