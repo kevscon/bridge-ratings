@@ -10,19 +10,20 @@
 
     <div>
       <p>Sufficiency Rating</p>
-      <form>
-        <input type="number" step="0.1" min={{ suff_lim['min'] }} max={{ suff_lim['max'] }}>
-      </form>
-    </div>
-    <div>
-      {% for feature in input_options.keys() %}
-      <p>{{ feature }}</p>
-      <select>
-        {% for option in input_options[feature].keys() %}
-          <option value="{{ option }}" SELECTED>{{ option }}</option>
+      <form method="post">
+        <input type="number" step="0.1" min={{ suff_lim['min'] }} max={{ suff_lim['max'] }} name="suf_rt">
+
+        {% for feature in input_options.keys() %}
+        <p>{{ feature }}</p>
+        <select name="{{ feature }}">
+          {% for option in input_options[feature].keys() %}
+            <option value="{{ option }}" SELECTED>{{ option }}</option>
+          {% endfor %}
+        </select>
         {% endfor %}
-      </select>
-      {% endfor %}
+
+        <p><input type="submit" value="Submit"></p>
+      </form>
     </div>
 
 
