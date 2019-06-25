@@ -6,6 +6,9 @@ from sklearn.externals import joblib
 # initialize app
 app = Flask(__name__)
 
+# add zip function to jinja
+app.jinja_env.filters['zip'] = zip
+
 # load classifier model
 with open('../model_output/model.sav', 'rb') as f:
     model = joblib.load(f)
@@ -14,8 +17,8 @@ with open('../model_output/model.sav', 'rb') as f:
 with open('input_options.json', 'r') as f:
     input_options = json.load(f)
 # separate numerical limits from input_options
-suff_lim = input_options['Sufficiency Rating']
-del input_options['Sufficiency Rating']
+suff_lim = input_options['Initial Sufficiency Rating']
+del input_options['Initial Sufficiency Rating']
 
 # load blank input series
 input_series = pd.read_json('input_series.json', typ='series')
@@ -31,9 +34,7 @@ cat_items = [
     'STRUCTURE_KIND_043A',
     'SUPERSTRUCTURE_COND_059',
     'DECK_STRUCTURE_TYPE_107',
-    'SURFACE_TYPE_108A',
-    'MEMBRANE_TYPE_108B',
-    'DECK_PROTECTION_108C'
+    'SURFACE_TYPE_108A'
 ]
 
 @app.route('/')
@@ -73,19 +74,24 @@ def post_it():
     # override blank input series
     input_series[num_feat.index] = num_feat
 
-    # output
+    # check output
     # with open('feat_out.json', 'w') as outfile:
-    #     json.dump(cat_feat, outfile)
+    #     json.dump(cat_inputs, outfile)
 
     prediction = model.predict([input_series])[0]
-
+    if prediction == 'poor':
+        prediction = 'Poor'
+    else:
+        prediction = 'Fair or Good'
 
     return render_template(
         'output.html',
-        prediction=prediction
+        prediction=prediction,
+        feats=input_options.keys(),
+        cat_inputs=cat_inputs
         )
 
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()

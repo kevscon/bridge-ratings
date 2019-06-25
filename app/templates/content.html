@@ -2,30 +2,50 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bridge Performance</title>
-    <link rel="icon" type="image/png" href="/static/tower.png">
+    <link rel="icon" type="image/png" href="static/img/tower.png">
+    <link rel="stylesheet" href="static/css/styles.css" type="text/css">
+
+    <style>
+      body {
+        background: linear-gradient(90deg, rgba(95,94,99,1) 0%, rgba(203,203,217,1) 50%, rgba(95,94,99,1) 100%);
+        font-family: Helvetica;
+        font-size: 18px;
+      }
+      .center {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+      }
+    </style>
+
   </head>
   <body>
 
 
-    <div>
-      <p>Sufficiency Rating</p>
+    <div class="center">
+      <p>Initial Sufficiency Rating</p>
       <form method="post">
         <input type="number" step="0.1" min={{ suff_lim['min'] }} max={{ suff_lim['max'] }} name="suf_rt">
 
         {% for feature in input_options.keys() %}
         <p>{{ feature }}</p>
+        <div class="custom-select" style="width:200px;">
         <select name="{{ feature }}">
+          <option value="">Select Item</option>
           {% for option in input_options[feature].keys() %}
-            <option value="{{ option }}" SELECTED>{{ option }}</option>
+            <option value="{{ option }}">{{ option }}</option>
           {% endfor %}
         </select>
+        </div>
         {% endfor %}
-
         <p><input type="submit" value="Submit"></p>
       </form>
     </div>
 
-
+    <script type="text/javascript" src="static/js/script.js"></script>
   </body>
 </html>
