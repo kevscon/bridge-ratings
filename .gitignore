@@ -1,5 +1,6 @@
 .ipynb_checkpoints
 /data
-/OLD
 nbi_guide.pdf
 /images
+/app
+/model_output
