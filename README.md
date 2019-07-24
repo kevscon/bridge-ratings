@@ -9,7 +9,7 @@ Using publicly available data gleaned from the National Bridge Inventory (NBI), 
 - Bridges with major repair work after 2007 were excluded
 
 This analysis also explored what trends can be interpreted from specific bridge characteristics. Based on the model's interpretation:
-- Variable correlated with better performance:
+- Variables correlated with better performance:
   - Higher initial Sufficiency Rating
   - Higher Superstructure Condition Rating
   - Concrete superstructure
