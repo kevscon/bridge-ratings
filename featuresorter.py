@@ -185,11 +185,11 @@ class FeatureSort:
 
         # define pos/neg plot coloring
         if rev_col:
-            pos_col = 'darkred'
+            pos_col = 'red'
             neg_col = 'darkgreen'
         else:
             pos_col = 'darkgreen'
-            neg_col = 'darkred'
+            neg_col = 'red'
 
         # initialize plot
         ax = plt.gca()
@@ -206,9 +206,15 @@ class FeatureSort:
         if feat_lab != 'df_idx':
             ax.set_xticklabels(feat_lab)
 
+        # hatching
+        bars = ax.patches
+        hatches = self.df.iloc[:, 1].map({True: '\\', False: ''})
+        for bar, hatch in zip(bars, hatches):
+            bar.set_hatch(hatch)
+
         # positive label for legend
-        pos_patch = mpatches.Patch(color='darkgreen', label='Positive')
+        pos_patch = mpatches.Patch(facecolor='darkgreen', label='Positive')
         # negative label for legend
-        neg_patch = mpatches.Patch(color='darkred', label='Negative')
+        neg_patch = mpatches.Patch(facecolor='red', label='Negative', hatch='\\', edgecolor='black')
         # display legend
         legend = plt.legend(title='Correlation', handles=[pos_patch, neg_patch])
